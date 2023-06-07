@@ -1,5 +1,10 @@
 import Stripe from 'stripe';
 
+export interface Chat {
+  id: string
+  created_at: string
+}
+
 export interface Song {
   id: string;
   user_id: string;

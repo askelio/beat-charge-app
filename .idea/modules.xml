@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/next13-spotify.iml" filepath="$PROJECT_DIR$/.idea/next13-spotify.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/beat-charge-app.iml" filepath="$PROJECT_DIR$/.idea/beat-charge-app.iml" />
     </modules>
   </component>
 </project>
