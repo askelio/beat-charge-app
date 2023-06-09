@@ -55,9 +55,9 @@ const Sidebar = ({ children, songs }: SidebarProps) => {
     },
     {
       icon: AiOutlineSound,
-      label: 'Публикация',
-      href: '/publish',
-      active: pathname === '/publish'
+      label: 'Ассистент',
+      href: '/gptmessaging',
+      active: pathname === '/gptmessaging'
     },
     {
       icon: CiSquarePlus,
