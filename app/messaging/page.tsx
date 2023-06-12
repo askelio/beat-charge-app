@@ -22,7 +22,6 @@ const Distribute = async () => {
                 <div className="mb-2 flex flex-col gap-y-6">
                     <h1 className="text-white text-3xl font-semibold">
                         <ChatPage user={user} />
-                        {process.env.REACT_APP_CHAT_ENGINE_PROJECT_ID}
                     </h1>
                 </div>
             </Header>

@@ -28,6 +28,7 @@ const Header: React.FC<HeaderProps> = ({
   const router = useRouter();
   const authModal = useAuthModal();
 
+
   const supabaseClient = useSupabaseClient();
   const { user } = useUser();
 
@@ -138,7 +139,7 @@ const Header: React.FC<HeaderProps> = ({
             <>
               <div>
                 <Button 
-                  onClick={authModal.onOpen} 
+                  onClick={authModal.onOpen}
                   className="
                     bg-transparent 
                     text-neutral-300 
