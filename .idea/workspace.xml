@@ -5,19 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54845a19-d309-41fc-9ebf-e47b80c90741" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/gptmessaging/components/chat.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/SignUpModal.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/openai.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/gptmessaging/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/gptmessaging/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/messaging/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/messaging/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(site)/components/PageContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(site)/components/PageContent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(site)/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(site)/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/account/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/SignUpModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/SignUpModal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hooks/useAuthModal.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/useAuthModal.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/stripe.ts" beforeDir="false" afterPath="$PROJECT_DIR$/libs/stripe.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/useSignUpModal.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/useSignUpModal.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/useUser.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/useUser.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/providers/ModalProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/providers/ModalProvider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types_db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types_db.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,27 +39,31 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2QpB7EaCPcN6EvvxAhhT7zpnB8P" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/alex/Documents/projects/fullstack-chat&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/alex/Documents/projects/beat-charge-app/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/home/alex/Documents/projects/beat-charge-app/app/(site)/components",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/home/alex/Documents/projects/beat-charge-app/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/(site)/components" />
       <recent name="$PROJECT_DIR$/app/messaging/components" />
     </key>
   </component>
@@ -72,7 +77,9 @@
       <updated>1686040472433</updated>
       <workItem from="1686040473462" duration="20332000" />
       <workItem from="1686442671755" duration="4263000" />
-      <workItem from="1686560659651" duration="18751000" />
+      <workItem from="1686560659651" duration="31463000" />
+      <workItem from="1686842178554" duration="11967000" />
+      <workItem from="1686908314147" duration="20047000" />
     </task>
     <servers />
   </component>

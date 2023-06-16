@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import SignUpModal from "@/components/SignUpModal";
 
 interface SignUPModalStore {
     isOpen: boolean;

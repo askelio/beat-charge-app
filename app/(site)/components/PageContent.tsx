@@ -3,6 +3,8 @@
 import { Song } from "@/types";
 import useOnPlay from "@/hooks/useOnPlay";
 import SongItem from "@/components/SongItem";
+import {useCookies} from "react-cookie";
+import updateLatestUserWithNullUsername from "@/actions/getLatestRegisteredAndSetUserName";
 
 interface PageContentProps {
   songs: Song[];
@@ -12,6 +14,12 @@ const PageContent: React.FC<PageContentProps> = ({
   songs
 }) => {
   const onPlay = useOnPlay(songs);
+
+
+  const [cookies, setCookie] = useCookies(['username']);
+
+  updateLatestUserWithNullUsername(cookies.username);
+
 
   if (songs.length === 0) {
     return (

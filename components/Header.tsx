@@ -14,6 +14,7 @@ import { useUser } from "@/hooks/useUser";
 import usePlayer from "@/hooks/usePlayer";
 
 import Button from "./Button";
+import useSignUpModal from "@/hooks/useSignUpModal";
 
 interface HeaderProps {
   children: React.ReactNode;
@@ -26,8 +27,9 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   const player = usePlayer();
   const router = useRouter();
-  const authModal = useAuthModal();
 
+  const authModal = useAuthModal();
+  const signUpModel = useSignUpModal();
 
   const supabaseClient = useSupabaseClient();
   const { user } = useUser();
@@ -139,7 +141,7 @@ const Header: React.FC<HeaderProps> = ({
             <>
               <div>
                 <Button 
-                  onClick={authModal.onOpen}
+                  onClick={signUpModel.onOpen}
                   className="
                     bg-transparent 
                     text-neutral-300 

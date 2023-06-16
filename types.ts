@@ -1,10 +1,5 @@
 import Stripe from 'stripe';
 
-export interface Chat {
-  id: string
-  created_at: string
-}
-
 export interface Song {
   id: string;
   user_id: string;
@@ -45,6 +40,7 @@ export interface Customer {
 
 export interface UserDetails {
   id: string;
+  username: string;
   first_name: string;
   last_name: string;
   full_name?: string;
