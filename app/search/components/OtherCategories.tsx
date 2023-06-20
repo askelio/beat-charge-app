@@ -4,6 +4,10 @@ import { Song } from "@/types";
 import MediaItem from "@/components/MediaItem";
 import LikeButton from "@/components/LikeButton";
 import useOnPlay from "@/hooks/useOnPlay";
+import {useRouter} from "next/navigation";
+import {useEffect, useState} from "react";
+import useDebounce from "@/hooks/useDebounce";
+import qs from "query-string";
 
 
 interface SearchContentProps {
@@ -14,10 +18,46 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                                                          songs
                                                      }) => {
     const onPlay = useOnPlay(songs);
+    const router = useRouter();
+    const [value, setValue] = useState<string>('');
+    const handleCategoryClick = (category:string)=> {
+        const query = {
+            category: category,
+        };
+
+        const url = qs.stringifyUrl({
+            url: '/search',
+            query
+        });
+
+        router.push(url);
+    }
+
+
+    if (songs.length === 0) {
+        return (
+            <div
+                className="
+          flex
+          flex-col
+          gap-y-2
+          w-full
+          px-6
+          text-neutral-400
+        "
+            >
+                No songs found.
+            </div>
+        )
+    }
+
+
+
 
     // flex flex-col gap-y-2 w-full px-6
     return (
         <div className=" grid  grid-cols-2  sm:grid-cols-3  md:grid-cols-3  lg:grid-cols-4  xl:grid-cols-5  2xl:grid-cols-8  gap-4  mt-4 p-10">
+
                 <style>
                     {`.searching-image {
                                 width: 180px;
@@ -32,8 +72,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                             }
                             `}
                 </style>
-
-                <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#FFB800]">
+                <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#FFB800]" onClick={()=>{handleCategoryClick('Поп')}}>
 
                     <p className="searching-title">
                         Поп
@@ -43,7 +82,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                         />
                 </div>
 
-                <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#00d1ff]">
+                <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#00d1ff]" onClick={()=>{handleCategoryClick('Рок')}}>
 
                     <p className="searching-title">
                         Рок
@@ -53,7 +92,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                     />
                 </div>
 
-            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#f40df9]">
+            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#f40df9]" onClick={()=>{handleCategoryClick('Хип-хоп')}}>
 
                 <p className="searching-title">
                     Хип-хоп
@@ -63,7 +102,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                 />
             </div>
 
-            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#00ff57]">
+            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#00ff57]" onClick={()=>{handleCategoryClick('R&B')}}>
 
                 <p className="searching-title">
                     R&B
@@ -73,7 +112,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                 />
             </div>
 
-            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#c800fa]">
+            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#c800fa]" onClick={()=>{handleCategoryClick('K-Pop')}}>
 
                 <p className="searching-title">
                     K-Pop
@@ -83,7 +122,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                 />
             </div>
 
-            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#ff7a00]">
+            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#ff7a00]" onClick={()=>{handleCategoryClick('Классика')}}>
 
                 <p className="searching-title">
                     Классика
@@ -93,7 +132,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                 />
             </div>
 
-            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#ff2424]">
+            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#ff2424]" onClick={()=>{handleCategoryClick('Для спорта')}}>
 
                 <p className="searching-title">
                     Для спорта
@@ -103,17 +142,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                 />
             </div>
 
-            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#2461ff]">
-
-                <p className="searching-title">
-                    Набирает популярность
-                </p>
-                <img alt="Image" loading="lazy" decoding="async" data-nimg="fill" className="object-cover searching-image"
-                     src="https://uaenfmjmypunityiredl.supabase.co/storage/v1/object/public/site-images/Mask%20group%20(7).png"
-                />
-            </div>
-
-            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#2461ff]">
+            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#2461ff]" onClick={()=>{handleCategoryClick('Вечеринка')}}>
 
                 <p className="searching-title">
                     Вечеринка
@@ -123,7 +152,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                 />
             </div>
 
-            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#24ffa3]">
+            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#24ffa3]" onClick={()=>{handleCategoryClick('Сон')}}>
 
                 <p className="searching-title">
                     Сон
@@ -133,7 +162,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                 />
             </div>
 
-            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#ff24a7]">
+            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#ff24a7]" onClick={()=>{handleCategoryClick('Инди')}}>
 
                 <p className="searching-title">
                     Инди
@@ -143,7 +172,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                 />
             </div>
 
-            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#24b0ff]">
+            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#24b0ff]" onClick={()=>{handleCategoryClick('Латино')}}>
 
                 <p className="searching-title">
                     Латино
@@ -153,7 +182,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                 />
             </div>
 
-            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#d19700]">
+            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#d19700]" onClick={()=>{handleCategoryClick('В дорогу')}}>
 
                 <p className="searching-title">
                     В дорогу
@@ -163,7 +192,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                 />
             </div>
 
-            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#9d9d9d]">
+            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#9d9d9d]" onClick={()=>{handleCategoryClick('Любовь')}}>
 
                 <p className="searching-title">
                     Любовь
@@ -173,7 +202,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                 />
             </div>
 
-            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#d10d00]">
+            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#d10d00]" onClick={()=>{handleCategoryClick('Джаз')}}>
 
                 <p className="searching-title">
                     Джаз
@@ -183,7 +212,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                 />
             </div>
 
-            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#d19700]">
+            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#d19700]" onClick={()=>{handleCategoryClick('Метал')}}>
 
                 <p className="searching-title">
                     Метал
@@ -193,7 +222,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                 />
             </div>
 
-            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#0015d1]">
+            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#0015d1]" onClick={()=>{handleCategoryClick('Кантри')}}>
 
                 <p className="searching-title">
                     Кантри
@@ -203,7 +232,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                 />
             </div>
 
-            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#50d100]">
+            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#50d100]" onClick={()=>{handleCategoryClick('Для геймеров')}}>
 
                 <p className="searching-title">
                     Для геймеров
@@ -213,7 +242,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                 />
             </div>
 
-            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#00d1b8]">
+            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#00d1b8]" onClick={()=>{handleCategoryClick('Панк')}}>
 
                 <p className="searching-title">
                     Панк
@@ -223,7 +252,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                 />
             </div>
 
-            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#d16400]">
+            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#d16400]" onClick={()=>{handleCategoryClick('Блюз')}}>
 
                 <p className="searching-title">
                     Блюз
@@ -233,7 +262,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                 />
             </div>
 
-            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#d1c900]">
+            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#d1c900]" onClick={()=>{handleCategoryClick('Фанк')}}>
 
                 <p className="searching-title">
                     Фанк
@@ -243,7 +272,7 @@ const OtherCategories: React.FC<SearchContentProps> = ({
                 />
             </div>
 
-            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#d100bc]">
+            <div className="relative  aspect-square  w-full h-full  rounded-md  overflow-hidden bg-[#d100bc]" onClick={()=>{handleCategoryClick('Афро')}}>
 
                 <p className="searching-title">
                     Афро

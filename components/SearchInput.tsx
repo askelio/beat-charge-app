@@ -8,6 +8,8 @@ import useDebounce from "@/hooks/useDebounce";
 
 import Input from "./Input";
 
+
+
 const SearchInput = () => {
   const router = useRouter();
   const [value, setValue] = useState<string>('');

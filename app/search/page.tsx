@@ -4,15 +4,21 @@ import Header from "@/components/Header";
 
 import SearchContent from "./components/SearchContent";
 import OtherCategories from "@/app/search/components/OtherCategories";
+import getSongsByCategory from "@/actions/getSongsByCategory";
 
 export const revalidate = 0;
 
 interface SearchProps {
-  searchParams: { title: string }
+  searchParams: { title: string , category?:string}
 };
 
 const Search = async ({ searchParams }: SearchProps) => {
-  const songs = await getSongsByTitle(searchParams.title);
+
+  let songs = await getSongsByTitle(searchParams.title);
+
+  if (searchParams.category) {
+    songs = await getSongsByCategory(searchParams.category);
+  }
 
   return (
     <div 

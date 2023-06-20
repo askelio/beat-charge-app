@@ -13,6 +13,8 @@ import { useUser } from "@/hooks/useUser";
 import Modal from './Modal';
 import Input from './Input';
 import Button from './Button';
+import {CategoryOptions} from "@/components/CategoryOptions";
+import { Select, Option } from "@material-tailwind/react";
 
 const UploadModal = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,6 +32,9 @@ const UploadModal = () => {
     defaultValues: {
       author: '',
       title: '',
+      category: '',
+      price: '',
+      bpm: '',
       song: null,
       image: null,
     }
@@ -98,6 +103,9 @@ const UploadModal = () => {
           user_id: user.id,
           title: values.title,
           author: values.author,
+          category: category,
+          price: +values.price,
+          bpm: +values.BPM,
           image_path: imageData.path,
           song_path: songData.path
         });
@@ -118,6 +126,11 @@ const UploadModal = () => {
     }
   }
 
+  const [category, setCategory] = useState('')
+  const handleCategoryChange = (event: any) => {
+    setCategory(event);
+  };
+
   return (
     <Modal
       title="Add a song"
@@ -133,13 +146,71 @@ const UploadModal = () => {
           id="title"
           disabled={isLoading}
           {...register('title', { required: true })}
-          placeholder="Song title"
+          placeholder="Track title"
         />
         <Input
           id="author"
           disabled={isLoading}
           {...register('author', { required: true })}
-          placeholder="Song author"
+          placeholder="Track author"
+        />
+
+        <div>
+          <h2>Category</h2>
+          <Select
+              id="category"
+              disabled={isLoading}
+
+              selected={(element) =>
+                  element &&
+                  React.cloneElement(element, {
+                    className: "flex items-center ml-7 px-0 gap-2 pointer-events-none",
+                  })
+              }
+
+              onChange={handleCategoryChange}
+              className="
+                flex
+                w-full
+                rounded-md
+                bg-neutral-700
+                border
+                border-transparent
+                px-3
+                py-3
+                text-sm
+                file:border-0
+                file:bg-transparent
+                file:text-sm
+                file:font-medium
+                placeholder:text-neutral-400
+                disabled:cursor-not-allowed
+                disabled:opacity-50
+                focus:outline-none">
+            {CategoryOptions.map((option)=>(
+                <Option className="text-black flex items-center gap-2" key={option.label} value={option.value}>{option.label}</Option>
+            ))}
+          </Select>
+        </div>
+
+
+
+        <Input
+            id="Price"
+            min="0"
+            max="10000"
+            disabled={isLoading}
+            {...register('price', { required: true })}
+            placeholder="Track Price"
+        />
+
+        <Input
+            id="BPM"
+            min="0"
+            max="1000"
+            disabled={isLoading}
+            {...register('BPM', { required: true })}
+            placeholder="Beats Per Minute"
         />
         <div>
           <div className="pb-1">

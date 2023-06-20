@@ -25,7 +25,7 @@ const useSongById = (id?: string) => {
 
       if (error) {
         setIsLoading(false);
-        return toast.error(error.message);
+        // return toast.error(error.message);
       }
       
       setSong(data as Song);
