@@ -6,19 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="54845a19-d309-41fc-9ebf-e47b80c90741" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(site)/components/SetUserName.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/instrumentals/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/instrumentals/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/messaging/components/chatPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/messaging/components/chatPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/search/components/OtherCategories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/search/components/OtherCategories.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/search/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/search/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/MediaItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/MediaItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Player.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Player.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/SearchInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/SearchInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/UploadModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/UploadModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hooks/useGetSongById.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/useGetSongById.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hooks/useLoadImage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/useLoadImage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/account/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/SongItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/SongItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +56,10 @@
       <recent name="$PROJECT_DIR$/app/(site)/components" />
       <recent name="$PROJECT_DIR$/app/messaging/components" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/actions" />
+      <recent name="$PROJECT_DIR$/components" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -81,7 +75,9 @@
       <workItem from="1686842178554" duration="11967000" />
       <workItem from="1686908314147" duration="24202000" />
       <workItem from="1687094601857" duration="23163000" />
-      <workItem from="1687178316065" duration="25676000" />
+      <workItem from="1687178316065" duration="26347000" />
+      <workItem from="1687367907570" duration="6201000" />
+      <workItem from="1687375736529" duration="8995000" />
     </task>
     <servers />
   </component>
