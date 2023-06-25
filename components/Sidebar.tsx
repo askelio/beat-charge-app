@@ -14,7 +14,12 @@ import Library from "./Library";
 import { useMemo } from "react";
 
 import Home from 'assets/img/Home.png'
-import {AiOutlineSound, BsShare, CiSquarePlus, TbCircleDot, TbCircleFilled} from "react-icons/all";
+import {
+  AiFillMessage,
+  AiOutlineCustomerService, AiOutlineMessage,
+  TbCircleDot,
+
+} from "react-icons/all";
 import {AiOutlineHeart} from "react-icons/ai";
 
 interface SidebarProps {
@@ -48,22 +53,16 @@ const Sidebar = ({ children, songs }: SidebarProps) => {
       active: pathname === '/instrumentals'
     },
     {
-      icon: BsShare,
+      icon: AiOutlineMessage,
       label: 'Общение',
       href: '/messaging',
       active: pathname === '/messaging'
     },
     {
-      icon: AiOutlineSound,
+      icon: AiOutlineCustomerService,
       label: 'Ассистент',
       href: '/gptmessaging',
       active: pathname === '/gptmessaging'
-    },
-    {
-      icon: CiSquarePlus,
-      label: 'Создать плейлист',
-      href: '/create-playlist',
-      active: pathname === '/create-playlist'
     },
     {
       icon: AiOutlineHeart,

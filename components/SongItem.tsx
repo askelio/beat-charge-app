@@ -7,6 +7,8 @@ import { Song } from "@/types";
 import useOneBuyClick from "@/components/OneBuyClick";
 import PlayButton from "./PlayButton";
 import {useUser} from "@/hooks/useUser";
+import {useEffect, useState} from "react";
+import loading from "@/components/loading";
 
 interface SongItemProps {
   data: Song;
@@ -19,8 +21,15 @@ const SongItem: React.FC<SongItemProps> = ({
 }) => {
   const imagePath = useLoadImage(data);
   const user = useUser();
+  const [isloading, setIsLoading] = useState(false);
+
   const HandleBuyClick = () => {
-    useOneBuyClick(data.id, user.user?.id).then((value)=>{console.log(value)})
+    setIsLoading(true)
+    useOneBuyClick(data.id, user.user?.id).then((value)=>{setIsLoading(false)})
+  }
+
+  if (isloading) {
+    return loading()
   }
 
   return ( 
@@ -98,7 +107,7 @@ const SongItem: React.FC<SongItemProps> = ({
           <PlayButton />
         </div>
       </div>
-      <button onClick={()=>{HandleBuyClick()}} className="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded">
+      <button onClick={()=>{HandleBuyClick()}} className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
         Buy
       </button>
     </div>

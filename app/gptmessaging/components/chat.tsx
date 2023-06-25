@@ -72,7 +72,7 @@ const ChatMessaging = (e: any, msg:any) => {
                         <div
                             key={index}
                             className={`${
-                                chat.role === "user" ? "bg-green-500" : "bg-gray-400"
+                                chat.role === "user" ? "bg-blue-500" : "bg-gray-400"
                             } text-white max-w-xl rounded-lg py-2 px-4 mb-2 max-w-max ${
                                 chat.role === "user" ? "self-end" : "self-start"
                             }`}

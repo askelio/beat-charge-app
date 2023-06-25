@@ -31,6 +31,7 @@ const useGetSpotifySongById = (id?: string) => {
                     title: response.data.album.name,
                     song_path: response.data.preview_url,
                     image_path: response.data.album.images[0].url,
+                    price:""
                 };
                 setSong(song);
                 setIsLoading(false);

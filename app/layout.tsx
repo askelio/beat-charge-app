@@ -10,6 +10,8 @@ import SupabaseProvider from '@/providers/SupabaseProvider'
 import Player from '@/components/Player'
 
 import './globals.css'
+import GptMessaging from "@/app/gptmessaging/page";
+import Distribute from "@/app/messaging/page";
 
 const font = Figtree({ subsets: ['latin'] })
 

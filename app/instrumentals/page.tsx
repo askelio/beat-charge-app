@@ -16,10 +16,10 @@ const Instrumentals = async () => {
         title: item.album.name,
         song_path: item.album.external_urls.spotify,
         image_path: item.album.images[0].url,
+        price: ""
     }));
 
     const instrumentalRecommendations = await getInstrumentalBeatsRecommendation(songs);
-    console.log(instrumentalRecommendations)
     const recommendations: Song[] = instrumentalRecommendations.map((item) => ({
         id: item.id,
         user_id: '', // Replace with the actual user ID
@@ -27,6 +27,7 @@ const Instrumentals = async () => {
         title: item.album.name,
         song_path: item.album.external_urls.spotify,
         image_path: item.album.images[0].url,
+        price:""
     }));
 
 
