@@ -7,7 +7,6 @@ RUN  npm install
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN npm run build
 RUN npx next build
 
 EXPOSE 3000
