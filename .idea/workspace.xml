@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="54845a19-d309-41fc-9ebf-e47b80c90741" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actions/getActiveProductsWithPrices.ts" beforeDir="false" afterPath="$PROJECT_DIR$/actions/getActiveProductsWithPrices.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(site)/loading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(site)/loading.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/gptmessaging/components/chat.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/gptmessaging/components/chat.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/gptmessaging/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/gptmessaging/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/instrumentals/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/instrumentals/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/messaging/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/messaging/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ListItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ListItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/PlayButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/PlayButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Sidebar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/SongItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/SongItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/styles/dot-styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/components/styles/dot-styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/useGetSpotifySongById.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/useGetSpotifySongById.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2QpB7EaCPcN6EvvxAhhT7zpnB8P" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/alex/Documents/projects/beat-charge-app/components&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/alex/Documents/projects/beat-charge-app/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/components" />
+      <recent name="$PROJECT_DIR$/app/(site)/components" />
+      <recent name="$PROJECT_DIR$/app/messaging/components" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/actions" />
+      <recent name="$PROJECT_DIR$/components" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="54845a19-d309-41fc-9ebf-e47b80c90741" name="Changes" comment="" />
+      <created>1686040472433</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1686040472433</updated>
+      <workItem from="1686040473462" duration="20332000" />
+      <workItem from="1686442671755" duration="4263000" />
+      <workItem from="1686560659651" duration="31463000" />
+      <workItem from="1686842178554" duration="11967000" />
+      <workItem from="1686908314147" duration="24202000" />
+      <workItem from="1687094601857" duration="23163000" />
+      <workItem from="1687178316065" duration="26347000" />
+      <workItem from="1687367907570" duration="6201000" />
+      <workItem from="1687375736529" duration="20929000" />
+      <workItem from="1687524260681" duration="2665000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

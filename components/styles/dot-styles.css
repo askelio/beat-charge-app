@@ -1,0 +1,96 @@
+:root {
+    --colors-brand: #404040;
+    --colors-brandAccent: #22c55e;
+    --colors-brandButtonText: white;
+    --colors-defaultButtonBackground: white;
+    --colors-defaultButtonBackgroundHover: #eaeaea;
+    --colors-defaultButtonBorder: lightgray;
+    --colors-defaultButtonText: gray;
+    --colors-dividerBackground: #eaeaea;
+    --colors-inputBackground: transparent;
+    --colors-inputBorder: lightgray;
+    --colors-inputBorderHover: gray;
+    --colors-inputBorderFocus: gray;
+    --colors-inputText: white;
+    --colors-inputLabelText: gray;
+    --colors-inputPlaceholder: darkgray;
+    --colors-messageText: gray;
+    --colors-messageTextDanger: red;
+    --colors-anchorTextColor: gray;
+    --colors-anchorTextHoverColor: darkgray;
+    --space-spaceSmall: 4px;
+    --space-spaceMedium: 8px;
+    --space-spaceLarge: 16px;
+    --space-labelBottomMargin: 8px;
+    --space-anchorBottomMargin: 4px;
+    --space-emailInputSpacing: 4px;
+    --space-socialAuthSpacing: 4px;
+    --space-buttonPadding: 10px 15px;
+    --space-inputPadding: 10px 15px;
+    --fontSizes-baseBodySize: 13px;
+    --fontSizes-baseInputSize: 14px;
+    --fontSizes-baseLabelSize: 14px;
+    --fontSizes-baseButtonSize: 14px;
+    --fonts-bodyFontFamily: ui-sans-serif, sans-serif;
+    --fonts-buttonFontFamily: ui-sans-serif, sans-serif;
+    --fonts-inputFontFamily: ui-sans-serif, sans-serif;
+    --fonts-labelFontFamily: ui-sans-serif, sans-serif;
+    --borderWidths-buttonBorderWidth: 1px;
+    --borderWidths-inputBorderWidth: 1px;
+    --radii-borderRadiusButton: 4px;
+    --radii-buttonBorderRadius: 4px;
+    --radii-inputBorderRadius: 4px;
+}
+
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 5px;
+    background-color: gray;
+}
+
+.dot.active {
+    background-color: blue;
+}
+
+.buttons {
+    background-color: #404040;
+    color: #ffffff;
+    border-color: #22c55e;
+    font-family: var(--fonts-buttonFontFamily);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: var(--radii-borderRadiusButton);
+    font-size: var(--fontSizes-baseButtonSize);
+    padding: var(--space-buttonPadding);
+    cursor: pointer;
+    border-width: var(--borderWidths-buttonBorderWidth);
+    border-style: solid;
+    width: 100%;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 100ms;
+}
+
+.username-input {
+    font-family: var(--fonts-inputFontFamily);
+    background: var(--colors-inputBackground);
+    border-radius: var(--radii-inputBorderRadius);
+    padding: var(--space-inputPadding);
+    cursor: text;
+    border-width: var(--borderWidths-inputBorderWidth);
+    border-color: var(--colors-inputBorder);
+    border-style: solid;
+    font-size: var(--fontSizes-baseInputSize);
+    width: 100%;
+    color: inherit;
+    box-sizing: border-box;
+}
+
+.sign-up-button {
+    content: 'Sign UP';
+    color: red;
+}
