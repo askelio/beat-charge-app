@@ -5,15 +5,21 @@ import Image from "next/image";
 import useLoadImage from "@/hooks/useLoadImage";
 import { Song } from "@/types";
 import usePlayer from "@/hooks/usePlayer";
+import { useState } from "react";
+import useDeleteSongById from "@/hooks/useDeleteSongById";
 
 interface MediaItemProps {
   data: Song;
   onClick?: (id: string) => void;
+  showDelete?: boolean;
+  handleSongsDelete: (id: string) => void;
 }
 
 const MediaItem: React.FC<MediaItemProps> = ({
   data,
   onClick,
+  showDelete=false,
+  handleSongsDelete,
 }) => {
   const player = usePlayer();
 
@@ -28,7 +34,8 @@ const MediaItem: React.FC<MediaItemProps> = ({
   };
 
   return ( 
-    <div
+    <div className="flex">
+        <div
       onClick={handleClick}
       className="
         flex 
@@ -63,6 +70,13 @@ const MediaItem: React.FC<MediaItemProps> = ({
           By {data.author}
         </p>
       </div>
+    </div>
+    {
+        showDelete &&
+        <div style={{marginLeft:"auto", backgroundColor:"brown", borderRadius:"4px", padding:"4px"}}>
+          <button className="w-full h-full" onClick={(id) => handleSongsDelete(id)}>delete</button>
+        </div>
+      }
     </div>
   );
 }

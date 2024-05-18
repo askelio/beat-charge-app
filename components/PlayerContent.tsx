@@ -1,7 +1,7 @@
 "use client";
 
 import useSound from "use-sound";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BsPauseFill, BsPlayFill } from "react-icons/bs";
 import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
 import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai";
@@ -28,6 +28,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
   const player = usePlayer();
   const [volume, setVolume] = useState(1);
   const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
 
   const Icon = isPlaying ? BsPauseFill : BsPlayFill;
   const VolumeIcon = volume === 0 ? HiSpeakerXMark : HiSpeakerWave;
@@ -102,6 +103,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
 
   return ( 
     <div className="grid grid-cols-2 md:grid-cols-3 h-full">
+
         <div className="flex w-full justify-start">
           <div className="flex items-center gap-x-4">
             <MediaItem data={song} />
@@ -204,6 +206,9 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
             />
           </div>
         </div>
+
+        <audio ref={audioRef} src={songUrl} >
+        </audio>
 
       </div>
    );

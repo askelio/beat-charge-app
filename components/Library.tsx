@@ -11,6 +11,8 @@ import useSubscribeModal from "@/hooks/useSubscribeModal";
 import useOnPlay from "@/hooks/useOnPlay";
 
 import MediaItem from "./MediaItem";
+import useDeleteSongById from "@/hooks/useDeleteSongById";
+import { useEffect, useState } from "react";
 
 interface LibraryProps {
   songs: Song[];
@@ -25,6 +27,23 @@ const Library: React.FC<LibraryProps> = ({
   const subscribeModal = useSubscribeModal();
 
   const onPlay = useOnPlay(songs);
+
+  const [list, setList] = useState(songs)
+
+  const [deletedSong, setDeletedSong] = useState('');
+
+  const onSongDelete = useDeleteSongById(deletedSong);
+  
+  const handleSongDelete = (id:string) => {
+    console.log(id)
+    setDeletedSong(id);
+    const sng = songs.filter((item) => item.id !== id);
+    setList(sng);
+  }
+
+  useEffect(()=>{
+    handleSongDelete(deletedSong);
+  }, [deletedSong])
 
   const onClick = () => {
     if (!user) {
@@ -59,11 +78,13 @@ const Library: React.FC<LibraryProps> = ({
         />
       </div>
       <div className="flex flex-col gap-y-2 mt-4 px-3">
-        {songs.map((item) => (
+        {list.map((item) => (
           <MediaItem 
             onClick={(id: string) => onPlay(id)} 
             key={item.id} 
             data={item}
+            showDelete={true}
+            handleSongsDelete={() => setDeletedSong(item.id)}
           />
         ))}
       </div>
