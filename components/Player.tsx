@@ -33,7 +33,7 @@ const Player = () => {
         px-4
       "
         >
-          <PlayerContent key={spotifySongUrl} song={spotifySong.song} songUrl={spotifySongUrl} />
+          <PlayerContent key={spotifySongUrl} song={spotifySong.song} songUrl={spotifySongUrl} ifSpotifySong={true}/>
         </div>
     );
 
@@ -51,7 +51,7 @@ const Player = () => {
         px-4
       "
     >
-      <PlayerContent key={songUrl} song={song} songUrl={songUrl} />
+      <PlayerContent key={songUrl} song={song} songUrl={songUrl} ifSpotifySong={false}/>
     </div>
   );
 }

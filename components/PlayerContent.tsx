@@ -17,11 +17,13 @@ import Slider from "./Slider";
 interface PlayerContentProps {
   song: Song;
   songUrl: string;
+  ifSpotifySong: boolean;
 }
 
 const PlayerContent: React.FC<PlayerContentProps> = ({ 
   song, 
-  songUrl
+  songUrl,
+  ifSpotifySong=false,
 }) => {
   const player = usePlayer();
   const [volume, setVolume] = useState(1);
@@ -103,7 +105,11 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
         <div className="flex w-full justify-start">
           <div className="flex items-center gap-x-4">
             <MediaItem data={song} />
-            <LikeButton songId={song.id} />
+            {
+              !ifSpotifySong &&      
+              <LikeButton songId={song.id} />
+            }
+            
           </div>
         </div>
 
