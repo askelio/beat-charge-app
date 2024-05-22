@@ -12,14 +12,14 @@ interface MediaItemProps {
   data: Song;
   onClick?: (id: string) => void;
   showDelete?: boolean;
-  handleSongsDelete: (id: string) => void;
+  handleSongsDelete?: (id: any) => void;
 }
 
 const MediaItem: React.FC<MediaItemProps> = ({
   data,
   onClick,
   showDelete=false,
-  handleSongsDelete,
+  handleSongsDelete=(id)=>{},
 }) => {
   const player = usePlayer();
 
@@ -73,8 +73,8 @@ const MediaItem: React.FC<MediaItemProps> = ({
     </div>
     {
         showDelete &&
-        <div style={{marginLeft:"auto", backgroundColor:"brown", borderRadius:"4px", padding:"4px"}}>
-          <button className="w-full h-full" onClick={(id) => handleSongsDelete(id)}>delete</button>
+        <div className="w-fit h-fit" style={{marginLeft:"auto", backgroundColor:"brown", borderRadius:"4px", padding:"4px"}}>
+          <button className="w-fit h-fit" style={{margin:"0px"}} onClick={(id) => handleSongsDelete(id)}>delete</button>
         </div>
       }
     </div>

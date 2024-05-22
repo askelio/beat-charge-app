@@ -156,7 +156,9 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
 
         <div className="flex w-full justify-start">
           <div className="flex items-center gap-x-4">
-            <MediaItem data={song} />
+            <MediaItem data={song} handleSongsDelete={function (id: string): void {
+              throw new Error("Function not implemented.");
+            } } />
             {
               !ifSpotifySong &&      
               <LikeButton songId={song.id} />
