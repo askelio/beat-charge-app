@@ -1,140 +1,120 @@
-"use client";
+// components/SignUpModal.tsx
+import React, { useState } from 'react';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import "./styles/signup-styles.css"
+import useSignUPModal from '@/hooks/useSignUpModal';
 
-import React, {useEffect, useState} from 'react';
-import { Auth } from '@supabase/auth-ui-react';
-import { ThemeSupa } from '@supabase/auth-ui-shared';
-import "./styles/dot-styles.css"
-import {
-    useSessionContext,
-    useSupabaseClient
-} from '@supabase/auth-helpers-react';
-import { useRouter } from 'next/navigation';
 
-import Modal from './Modal';
-import useSignUPModal from "@/hooks/useSignUpModal";
-import button from "@/components/Button";
-import updateLatestUserWithNullUsername from "@/actions/getLatestRegisteredAndSetUserName";
-import { useCookies } from 'react-cookie';
+const SignUpModal: React.FC = () => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const supabase = useSupabaseClient();
 
-const SignUPModal = () => {
-    const { session } = useSessionContext();
-    const router = useRouter();
-    const { onClose, isOpen } = useSignUPModal();
-    const supabaseClient = useSupabaseClient();
-    const [currentPage, setCurrentPage] = useState(1);
-    const [username, setUsername] = useState('');
-    const [cookies, setCookie] = useCookies(['username']);
+  const { onClose, isOpen } = useSignUPModal();
 
-    useEffect(() => {
-        if (session) {
-            router.refresh();
-            onClose();
-        }
-    }, [session, router, onClose]);
+  const getUsersByUsername = async (username: any) => {
+    let { data } = await supabase
+      .from('users')
+      .select('id')
+      .eq('username', username);
+      return data
+  }
 
-    const onChange = (open: boolean) => {
-        if (!open) {
-            onClose();
-            setCurrentPage(1);
-        }
+  const handleSignUp = async () => {
+    setLoading(true);
+
+    
+    const users = await getUsersByUsername(username);
+    console.log(users)
+
+    if (users?.length && users?.length > 0) {
+        setError(`User with username ${username} already exists`);
+        setLoading(false);
+        return;
+    }
+    // Sign up the user with email and password
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+
+    if (error) {
+      setError(error.message);
+      setLoading(false);
+      return;
     }
 
-    const nextPage = () => {
-        setCurrentPage(currentPage + 1);
-        const delay = setTimeout(() => {
-            changeDefaultSupabaseAuthElements();
-            setCookie('username', username, { path: '/' });
-        }, 0);
+    // Insert the username and email into the profiles table
+    const { error: profileError } = await supabase
+      .from('users')
+      .update({ username: username })
+      .eq('id', data.user?.id);
 
-    };
+    if (profileError) {
+      setError(profileError.message);
+      setLoading(false);
+      return;
+    }
 
-    const previousPage = () => {
-        setCurrentPage(currentPage - 1);
-    };
+    setError(null);
+    onClose();
+    setLoading(false);
+  };
 
-    const handleUsernameChange = (e: any) => {
-        setUsername(e.target.value);
-    };
+  if (!isOpen) return null;
 
-    const handleClick = () => {
-        console.log('jhello')
-    };
+  return (
+    <div className="modal">
+      <div className="modal-content bg-neutral-800">
+        <div className="modal-header">
+          <h2 className='text-white' >Sign Up</h2>
+          <span className="close" onClick={onClose}>&times;</span>
+        </div>
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
+          <input
+            id="username"
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        {error && <p className="error-message">{error}</p>}
+        <button
+          className="submit-button"
+          onClick={handleSignUp}
+          disabled={loading}
+        >
+          {loading ? 'Signing Up...' : 'Sign Up'}
+        </button>
+      </div>
+    </div>
+  );
+};
 
-    const changeDefaultSupabaseAuthElements = () => {
-        // Crutch to change Sign In to Sign Up because of using supabase sign in functionality that does not
-        // allow to add or change extra fields during signin/signup process etc.
-
-        const button = document.getElementsByClassName('supabase-auth-ui_ui-button c-egTDuJ c-egTDuJ-cmFMMs-color-primary')[0];
-        const googleButton = document.getElementsByClassName("supabase-auth-ui_ui-button c-egTDuJ c-egTDuJ-iwjZXY-color-default")[0];
-        const signUpLink = document.getElementsByClassName("supabase-auth-ui_ui-anchor c-dumjqv")[1]
-        // Check if the button element exists
-        if (button) {
-            // Update the button text
-            button.textContent = 'Sign Up';
-        }
-        if(googleButton) {
-            googleButton.childNodes[1].textContent = 'Sign up with Google';;
-        }
-        // if (signUpLink) {
-        //     signUpLink.remove();
-        // }
-    };
-
-    return (
-        <Modal
-            title="Sign UP"
-            isOpen={isOpen}
-            onChange={onChange}
-            description="Create a new account">
-
-            <div className="modal-content">
-                {currentPage === 1 && (
-                    <div className="page">
-                        <h2 style={{paddingBottom: '5px', color:"inherit"}}>Provide Your Username</h2>
-                        <input type="text" value={username} className="username-input" onChange={handleUsernameChange} />
-                        <br/>
-                        <br/>
-
-                        <button className='buttons' disabled={!username} onClick={nextPage}>
-                            Next
-                        </button>
-
-                    </div>
-                )}
-
-                {currentPage === 2 && (
-                    <div className="page">
-                        <Auth
-                            supabaseClient={supabaseClient}
-                            providers={['google']}
-                            appearance={{
-                                theme: ThemeSupa,
-                                variables: {
-                                    default: {
-                                        colors: {
-                                            brand: '#404040',
-                                            brandAccent: '#22c55e'
-                                        }
-                                    }
-                                }
-                            }}
-
-                            theme="dark"
-                        />
-
-                        <button className='buttons' onClick={previousPage}>Back</button>
-
-                    </div>
-                )}
-
-                <div className="flex mt-[10px] justify-center">
-                    <span className={`dot ${currentPage === 1 ? 'active' : ''}`} />
-                    <span className={`dot ${currentPage === 2 ? 'active' : ''}`} />
-                </div>
-            </div>
-
-        </Modal>
-    );
-}
-
-export default SignUPModal;
+export default SignUpModal;
