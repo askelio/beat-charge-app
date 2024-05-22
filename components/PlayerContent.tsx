@@ -12,7 +12,7 @@ import usePlayer from "@/hooks/usePlayer";
 import LikeButton from "./LikeButton";
 import MediaItem from "./MediaItem";
 import Slider from "./Slider";
-
+import './styles/player-styles.css'
 
 interface PlayerContentProps {
   song: Song;
@@ -26,12 +26,78 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
   ifSpotifySong=false,
 }) => {
   const player = usePlayer();
-  const [volume, setVolume] = useState(1);
+
+  const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef(null);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(1);
 
   const Icon = isPlaying ? BsPauseFill : BsPlayFill;
+
   const VolumeIcon = volume === 0 ? HiSpeakerXMark : HiSpeakerWave;
+
+  useEffect(() => {
+    const audio = audioRef.current;
+
+    if (audio) {
+      const setAudioData = () => {
+        setDuration(audio.duration);
+        setCurrentTime(audio.currentTime);
+      };
+
+      const setAudioTime = () => setCurrentTime(audio.currentTime);
+
+      audio.addEventListener('loadeddata', setAudioData);
+      audio.addEventListener('timeupdate', setAudioTime);
+
+      return () => {
+        audio.removeEventListener('loadeddata', setAudioData);
+        audio.removeEventListener('timeupdate', setAudioTime);
+      };
+    }
+  }, []);
+
+
+  const togglePlayPause = () => {
+    const audio = audioRef.current;
+    console.log(isPlaying)
+    if (audio) {
+      if (isPlaying) {
+        audio.pause();
+      } else {
+        audio.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const handleProgressChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const audio = audioRef.current;
+    const newTime = Number(event.target.value);
+
+    if (audio) {
+      audio.currentTime = newTime;
+      setCurrentTime(newTime);
+    }
+  };
+
+  const handleVolumeChange = (value: number) => {
+    const audio = audioRef.current;
+    const newVolume = value
+
+    if (audio) {
+      audio.volume = newVolume;
+      setVolume(newVolume);
+    }
+  };
+
+  const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  };
+
 
   const onPlayNext = () => {
     if (player.ids.length === 0) {
@@ -63,46 +129,30 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
     player.setId(previousSong);
   }
 
-  const [play, { pause, sound }] = useSound(
-    songUrl,
-    { 
-      volume: volume,
-      onplay: () => setIsPlaying(true),
-      onend: () => {
-        setIsPlaying(false);
-        onPlayNext();
-      },
-      onpause: () => setIsPlaying(false),
-      format: ['mp3']
-    }
-  );
 
-  useEffect(() => {
-    sound?.play();
-    
-    return () => {
-      sound?.unload();
-    }
-  }, [sound]);
+  return (
 
-  const handlePlay = () => {
-    if (!isPlaying) {
-      play();
-    } else {
-      pause();
-    }
-  }
+    <div>
+      <div className="progress-bar">
+        <span className="mx-2">{formatTime(currentTime)}</span>
 
-  const toggleMute = () => {
-    if (volume === 0) {
-      setVolume(1);
-    } else {
-      setVolume(0);
-    }
-  }
+        <input
+          type="range"
+          min="0"
+          max={duration}
+          value={currentTime}
+          className="bg-blue-500"
+          onChange={handleProgressChange}
+        />
+        <span className="mx-2">{formatTime(duration)}</span>
 
-  return ( 
-    <div className="grid grid-cols-2 md:grid-cols-3 h-full">
+      </div>
+
+      <audio ref={audioRef} src={songUrl} preload="metadata" />
+
+
+
+      <div className="grid grid-cols-2 md:grid-cols-3 h-full">
 
         <div className="flex w-full justify-start">
           <div className="flex items-center gap-x-4">
@@ -114,7 +164,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
             
           </div>
         </div>
-
+      
         <div 
           className="
             flex 
@@ -126,7 +176,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
           "
         >
           <div 
-            onClick={handlePlay} 
+            onClick={togglePlayPause} 
             className="
               h-10
               w-10
@@ -166,7 +216,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
             "
           />
           <div 
-            onClick={handlePlay} 
+            onClick={togglePlayPause} 
             className="
               flex 
               items-center 
@@ -196,21 +246,22 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
         <div className="hidden md:flex w-full justify-end pr-2">
           <div className="flex items-center gap-x-2 w-[120px]">
             <VolumeIcon 
-              onClick={toggleMute} 
+              onClick={()=>{setVolume(0)}} 
               className="cursor-pointer" 
               size={34} 
             />
             <Slider 
               value={volume} 
-              onChange={(value) => setVolume(value)}
+              onChange={(value) => {handleVolumeChange(value)}}
             />
           </div>
         </div>
 
-        <audio ref={audioRef} src={songUrl} >
-        </audio>
 
-      </div>
+    </div>
+    </div>
+
+    
    );
 }
  
