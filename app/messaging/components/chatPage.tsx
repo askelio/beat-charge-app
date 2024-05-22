@@ -9,7 +9,8 @@ const ChatsPage = (props: any) => {
 
     const email = props?.user?.email;
     const secret  = props?.user?.id;
-
+    const chat_engine_project_id = "25a55712-f339-4e0e-8f57-3319125e0018";
+    const chat_engine_private_key = "799afb54-8f37-493f-aaf6-25d267e56083";
     const [userData, setUserData] = useState<UserDetails|''>();
 
     useEffect(() => {
@@ -28,7 +29,7 @@ const ChatsPage = (props: any) => {
             const login = async () => {
                 await axios.get("https://api.chatengine.io/users/me/", {
                     headers: {
-                        "Project-ID": "9226e59e-9c0b-4699-8872-64f9136129b4",
+                        "Project-ID": chat_engine_project_id,
                         "User-Name": userData?userData.username:email,
                         "User-Secret": secret,
                     },
@@ -46,7 +47,7 @@ const ChatsPage = (props: any) => {
                             email, secret,
                             first_name:userData?userData.first_name:email,
                             last_name:userData?userData.last_name:email},
-                        { headers: { "Private-Key":  "b64b5462-4b60-45a7-8ae6-37aa6748f936" } }
+                        { headers: { "Private-Key":  chat_engine_private_key } }
                     );
                 } catch (e) {
                     console.log(e);
@@ -83,7 +84,7 @@ const ChatsPage = (props: any) => {
     return (
         <div id={'chat-class-id'} style={{ height: "80vh", width: "70vw"}}>
             <PrettyChatWindow
-                projectId={"9226e59e-9c0b-4699-8872-64f9136129b4"}
+                projectId={chat_engine_project_id}
                 username={userData?userData.username:''}
                 secret={props?.user.id}
 
