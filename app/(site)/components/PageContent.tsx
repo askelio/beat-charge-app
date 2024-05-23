@@ -3,34 +3,26 @@
 import { Song } from "@/types";
 import useOnPlay from "@/hooks/useOnPlay";
 import SongItem from "@/components/SongItem";
-import {useCookies} from "react-cookie";
+import { useCookies } from "react-cookie";
 import updateLatestUserWithNullUsername from "@/actions/getLatestRegisteredAndSetUserName";
 
 interface PageContentProps {
   songs: Song[];
 }
 
-const PageContent: React.FC<PageContentProps> = ({
-  songs
-}) => {
+const PageContent: React.FC<PageContentProps> = ({ songs }) => {
   const onPlay = useOnPlay(songs);
 
-
-  const [cookies, setCookie] = useCookies(['username']);
+  const [cookies, setCookie] = useCookies(["username"]);
 
   updateLatestUserWithNullUsername(cookies.username);
 
-
   if (songs.length === 0) {
-    return (
-      <div className="mt-4 text-neutral-400">
-        No songs available.
-      </div>
-    )
+    return <div className="mt-4 text-neutral-400">No songs available.</div>;
   }
 
-  return ( 
-    <div 
+  return (
+    <div
       className="
         grid 
         grid-cols-2 
@@ -38,20 +30,20 @@ const PageContent: React.FC<PageContentProps> = ({
         md:grid-cols-3 
         lg:grid-cols-4 
         xl:grid-cols-5 
-        2xl:grid-cols-8 
+        2xl:grid-cols-6 
         gap-4 
         mt-4
       "
     >
       {songs.map((item) => (
-        <SongItem 
-          onClick={(id: string) => onPlay(id)} 
-          key={item.id} 
+        <SongItem
+          onClick={(id: string) => onPlay(id)}
+          key={item.id}
           data={item}
         />
       ))}
     </div>
   );
-}
- 
+};
+
 export default PageContent;
