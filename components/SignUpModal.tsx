@@ -1,14 +1,13 @@
 // components/SignUpModal.tsx
-import React, { useState } from 'react';
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
-import "./styles/signup-styles.css"
-import useSignUPModal from '@/hooks/useSignUpModal';
-
+import React, { useState } from "react";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import "./styles/signup-styles.css";
+import useSignUPModal from "@/hooks/useSignUpModal";
 
 const SignUpModal: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const supabase = useSupabaseClient();
@@ -17,30 +16,28 @@ const SignUpModal: React.FC = () => {
 
   const getUsersByUsername = async (username: any) => {
     let { data } = await supabase
-      .from('users')
-      .select('id')
-      .eq('username', username);
-      return data
-  }
+      .from("users")
+      .select("id")
+      .eq("username", username);
+    return data;
+  };
 
   const handleSignUp = async () => {
     setLoading(true);
 
-    
     const users = await getUsersByUsername(username);
-    console.log(users)
+    console.log(users);
 
     if (users?.length && users?.length > 0) {
-        setError(`User with username ${username} already exists`);
-        setLoading(false);
-        return;
+      setError(`User with username ${username} already exists`);
+      setLoading(false);
+      return;
     }
     // Sign up the user with email and password
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
     });
-
 
     if (error) {
       setError(error.message);
@@ -50,9 +47,9 @@ const SignUpModal: React.FC = () => {
 
     // Insert the username and email into the profiles table
     const { error: profileError } = await supabase
-      .from('users')
+      .from("users")
       .update({ username: username })
-      .eq('id', data.user?.id);
+      .eq("id", data.user?.id);
 
     if (profileError) {
       setError(profileError.message);
@@ -68,11 +65,20 @@ const SignUpModal: React.FC = () => {
   if (!isOpen) return null;
 
   return (
-    <div className="modal">
+    <div
+      className="modal
+    bg-neutral-900/90 
+    backdrop-blur-sm 
+    fixed 
+    inset-0
+  "
+    >
       <div className="modal-content bg-neutral-800">
         <div className="modal-header">
-          <h2 className='text-white' >Sign Up</h2>
-          <span className="close" onClick={onClose}>&times;</span>
+          <h2 className="text-white">Sign Up</h2>
+          <span className="close" onClick={onClose}>
+            &times;
+          </span>
         </div>
         <div className="form-group">
           <label htmlFor="username">Username</label>
@@ -110,7 +116,7 @@ const SignUpModal: React.FC = () => {
           onClick={handleSignUp}
           disabled={loading}
         >
-          {loading ? 'Signing Up...' : 'Sign Up'}
+          {loading ? "Signing Up..." : "Sign Up"}
         </button>
       </div>
     </div>

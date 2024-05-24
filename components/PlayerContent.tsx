@@ -12,7 +12,7 @@ import usePlayer from "@/hooks/usePlayer";
 import LikeButton from "./LikeButton";
 import MediaItem from "./MediaItem";
 import Slider from "./Slider";
-import './styles/player-styles.css'
+import "./styles/player-styles.css";
 
 interface PlayerContentProps {
   song: Song;
@@ -20,10 +20,10 @@ interface PlayerContentProps {
   ifSpotifySong: boolean;
 }
 
-const PlayerContent: React.FC<PlayerContentProps> = ({ 
-  song, 
+const PlayerContent: React.FC<PlayerContentProps> = ({
+  song,
   songUrl,
-  ifSpotifySong=false,
+  ifSpotifySong = false,
 }) => {
   const player = usePlayer();
 
@@ -44,31 +44,36 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
       const setAudioData = () => {
         setDuration(audio.duration);
         setCurrentTime(audio.currentTime);
+        togglePlayPause();
       };
 
       const setAudioTime = () => setCurrentTime(audio.currentTime);
 
-      audio.addEventListener('loadeddata', setAudioData);
-      audio.addEventListener('timeupdate', setAudioTime);
+      const handleEnded = () => {
+        onPlayNext(); // Вызываем функцию для воспроизведения следующего трека
+      };
+
+      audio.addEventListener("loadeddata", setAudioData);
+      audio.addEventListener("timeupdate", setAudioTime);
+      audio.addEventListener("ended", handleEnded); // Добавляем обработчик события ended
 
       return () => {
-        audio.removeEventListener('loadeddata', setAudioData);
-        audio.removeEventListener('timeupdate', setAudioTime);
+        audio.removeEventListener("loadeddata", setAudioData);
+        audio.removeEventListener("timeupdate", setAudioTime);
+        audio.removeEventListener("ended", handleEnded); // Удаляем обработчик события ended при размонтировании компонента
       };
     }
   }, []);
 
-
   const togglePlayPause = () => {
     const audio = audioRef.current;
-    console.log(isPlaying)
+    setIsPlaying(!isPlaying);
     if (audio) {
       if (isPlaying) {
         audio.pause();
       } else {
         audio.play();
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
@@ -84,7 +89,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
 
   const handleVolumeChange = (value: number) => {
     const audio = audioRef.current;
-    const newVolume = value
+    const newVolume = value;
 
     if (audio) {
       audio.volume = newVolume;
@@ -95,9 +100,8 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
-
 
   const onPlayNext = () => {
     if (player.ids.length === 0) {
@@ -112,7 +116,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
     }
 
     player.setId(nextSong);
-  }
+  };
 
   const onPlayPrevious = () => {
     if (player.ids.length === 0) {
@@ -127,11 +131,9 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
     }
 
     player.setId(previousSong);
-  }
-
+  };
 
   return (
-
     <div>
       <div className="progress-bar">
         <span className="mx-2">{formatTime(currentTime)}</span>
@@ -145,29 +147,24 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
           onChange={handleProgressChange}
         />
         <span className="mx-2">{formatTime(duration)}</span>
-
       </div>
 
       <audio ref={audioRef} src={songUrl} preload="metadata" />
 
-
-
       <div className="grid grid-cols-2 md:grid-cols-3 h-full">
-
         <div className="flex w-full justify-start">
           <div className="flex items-center gap-x-4">
-            <MediaItem data={song} handleSongsDelete={function (id: string): void {
-              throw new Error("Function not implemented.");
-            } } />
-            {
-              !ifSpotifySong &&      
-              <LikeButton songId={song.id} />
-            }
-            
+            <MediaItem
+              data={song}
+              handleSongsDelete={function (id: string): void {
+                throw new Error("Function not implemented.");
+              }}
+            />
+            {!ifSpotifySong && <LikeButton songId={song.id} />}
           </div>
         </div>
-      
-        <div 
+
+        <div
           className="
             flex 
             md:hidden 
@@ -177,8 +174,8 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
             items-center
           "
         >
-          <div 
-            onClick={togglePlayPause} 
+          <div
+            onClick={togglePlayPause}
             className="
               h-10
               w-10
@@ -195,7 +192,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
           </div>
         </div>
 
-        <div 
+        <div
           className="
             hidden
             h-full
@@ -209,7 +206,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
         >
           <AiFillStepBackward
             onClick={onPlayPrevious}
-            size={30} 
+            size={30}
             className="
               text-neutral-400 
               cursor-pointer 
@@ -217,8 +214,8 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
               transition
             "
           />
-          <div 
-            onClick={togglePlayPause} 
+          <div
+            onClick={togglePlayPause}
             className="
               flex 
               items-center 
@@ -235,36 +232,36 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
           </div>
           <AiFillStepForward
             onClick={onPlayNext}
-            size={30} 
+            size={30}
             className="
               text-neutral-400 
               cursor-pointer 
               hover:text-white 
               transition
-            " 
+            "
           />
         </div>
 
         <div className="hidden md:flex w-full justify-end pr-2">
           <div className="flex items-center gap-x-2 w-[120px]">
-            <VolumeIcon 
-              onClick={()=>{setVolume(0)}} 
-              className="cursor-pointer" 
-              size={34} 
+            <VolumeIcon
+              onClick={() => {
+                setVolume(0);
+              }}
+              className="cursor-pointer"
+              size={34}
             />
-            <Slider 
-              value={volume} 
-              onChange={(value) => {handleVolumeChange(value)}}
+            <Slider
+              value={volume}
+              onChange={(value) => {
+                handleVolumeChange(value);
+              }}
             />
           </div>
         </div>
-
-
+      </div>
     </div>
-    </div>
+  );
+};
 
-    
-   );
-}
- 
 export default PlayerContent;
