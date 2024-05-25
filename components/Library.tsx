@@ -35,7 +35,6 @@ const Library: React.FC<LibraryProps> = ({
   const onSongDelete = useDeleteSongById(deletedSong);
   
   const handleSongDelete = (id:string) => {
-    console.log(id)
     setDeletedSong(id);
     const sng = songs.filter((item) => item.id !== id);
     setList(sng);

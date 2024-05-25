@@ -4,11 +4,11 @@ import Image from "next/image";
 
 import useLoadImage from "@/hooks/useLoadImage";
 import { Song } from "@/types";
-import useOneBuyClick from "@/components/OneBuyClick";
 import PlayButton from "./PlayButton";
 import {useUser} from "@/hooks/useUser";
 import {useEffect, useState} from "react";
 import loading from "@/components/loading";
+import axios from "axios";
 
 interface SongItemProps {
   data: Song;
@@ -23,9 +23,31 @@ const SongItem: React.FC<SongItemProps> = ({
   const user = useUser();
   const [isloading, setIsLoading] = useState(false);
 
-  const HandleBuyClick = () => {
+  const [title, setTitle] = useState(data.title);
+  const [price, setPrice] = useState(data.price);
+  const [email, setEmail] = useState(user.user?.email)
+  const [song_id, setSongId] = useState(data.id)
+  const [paymentLink, setPaymentLink] = useState('');
+
+  const HandleBuyClick = async () => {
     setIsLoading(true)
-    useOneBuyClick(data.id, user.user?.id).then((value)=>{setIsLoading(false)})
+    try {
+
+      const response = await axios.post('/api/create-product', {
+        title,
+        price,
+        song_id,
+      });
+      
+      setPaymentLink(response.data.url);
+      const url = response.data.url
+      if(url) {
+        window.open(url)
+      }
+      
+    } catch (error) {
+      console.error('Error creating product:', error);
+    }
   }
 
   if (isloading) {

@@ -9,7 +9,6 @@ const useDeleteSongById = (id?: string | null) => {
       return;
     }
 
-    console.log(id)
 
     const deleteSong = async () => {
         const { error } = await supabaseClient
