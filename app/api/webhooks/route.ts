@@ -6,7 +6,8 @@ import { stripe } from '@/libs/stripe';
 import {
   upsertProductRecord,
   upsertPriceRecord,
-  manageSubscriptionStatusChange
+  manageSubscriptionStatusChange,
+  managePurchaseStatusChange,
 } from '@/libs/supabaseAdmin';
 
 const relevantEvents = new Set([
@@ -69,6 +70,13 @@ export async function POST(
               subscriptionId as string,
               checkoutSession.customer as string,
               true
+            );
+          } else if (checkoutSession.mode === 'payment'){
+            const paymentId = checkoutSession.payment_intent;
+            await managePurchaseStatusChange(              
+              paymentId as string,
+              checkoutSession.customer as string,
+              checkoutSession.metadata,
             );
           }
           break;

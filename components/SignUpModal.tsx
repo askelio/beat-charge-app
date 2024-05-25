@@ -26,7 +26,6 @@ const SignUpModal: React.FC = () => {
     setLoading(true);
 
     const users = await getUsersByUsername(username);
-    console.log(users);
 
     if (users?.length && users?.length > 0) {
       setError(`User with username ${username} already exists`);

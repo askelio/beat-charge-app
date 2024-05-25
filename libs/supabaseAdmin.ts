@@ -171,9 +171,65 @@ const manageSubscriptionStatusChange = async (
     );
 };
 
+
+const managePurchaseStatusChange = async (
+  paymentId: string,
+  customerId: string,
+  metadata: any,
+) => {
+  const { data: customerData, error: noCustomerError } = await supabaseAdmin
+    .from('customers')
+    .select('id')
+    .eq('stripe_customer_id', customerId)
+    .single();
+  if (noCustomerError) throw noCustomerError;
+
+  const { id: uuid } = customerData!;
+  // Retrieve the payment session from Stripe
+  const paymentIntent = await stripe.paymentIntents.retrieve(paymentId,
+  {
+    expand: ['charges.data.payment_intent'],
+  }  
+  );
+  
+  const songId = metadata.song_id;
+
+  if (!songId) {
+    throw new Error('Song ID not found in payment intent metadata');
+  }
+
+
+  const song = await supabaseAdmin
+    .from('songs')
+    .select('*')
+    .eq('id', songId)
+    .single();
+
+
+  const { data: purchaseData, error: insertError } = await supabaseAdmin
+    .from('songs_purchases')
+    .insert({ 
+      buyer_id: uuid, 
+      title: song.data?.title, 
+      song_path: song.data?.song_path, 
+      image_path: song.data?.image_path, 
+      author: song.data?.author,
+      user_id: song.data?.user_id,
+      price: 0,
+    });
+
+  console.log('Insert result:')
+  console.log(purchaseData)
+  console.log(insertError)
+
+  if (insertError) throw insertError;
+  
+};
+
 export {
   upsertProductRecord,
   upsertPriceRecord,
   createOrRetrieveCustomer,
+  managePurchaseStatusChange,
   manageSubscriptionStatusChange,
 };
